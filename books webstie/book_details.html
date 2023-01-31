@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szczegóły</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- ikony  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <div class="header-1">
+
+        <a href="index.html" class="logo"> IKS <i class="fas fa-book"></i></a>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="wyszukaj tytuł..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="cart.html" class="fas fa-shopping-cart"></a>
+            <div id="login-btn" class="fas fa-user"> Zaloguj</div>
+            
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="index.html">Strona główna</a>
+            <a href="catalog.html">Oferta</a>
+
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+    <a href="#home" class="fas fa-home"></a>
+
+    <a href="#contact" class="footer"></a>
+</nav>
+
+<!-- login form  -->
+
+<div class="login-form-container">
+
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="">
+        <h3>Logowanie</h3>
+        <span>Nazwa użytkownika</span>
+        <input type="text" name="" class="box" placeholder="wprowadź login" id="login">
+        <span>Hasło</span>
+        <input type="password" name="" class="box" placeholder="wprowadź hasło" id="password">
+
+        <input type="button" value="Zaloguj się" class="btn" onclick="logClick()">
+
+        <p>Nie masz konta? <a href="#">Utwórz je tutaj</a></p>
+    </form>
+
+</div>
+
+<div class="book-container">
+    <div class="book-image">
+        <br>
+        <br>
+        <br>
+      <img id="image" src="image/book-7.png" alt="Book cover" style="max-height: 500px; margin-left: 100px;">
+    </div>
+    <div class="book-details">
+        <br>
+        <br>
+        <br>
+        <br>
+        
+      <h2 id="title" class="book-title" style="font-size: 70px;">Tytuł Książki</h2>
+      <p id="author" class="book-author" style="font-size: 40px;">Autor</p>
+      <br>
+      <p id="description" class="book-description" style="font-size: 20px; word-wrap: break-word; max-width: 50%;">Opis</p>
+      <p style="font-size: 30px;">Ocena użytkowników:</p>
+      <p id="stars">
+      
+      <p id="price" class="book-price" style="font-size: 30px;">Cena: $XX.XX</p>
+      
+      <br>
+        <p>
+            <button id="to-cart" class="add-to-cart" style="font-size: 25px; cursor: pointer;">Dodaj do koszyka</button>
+        </p>
+        <br>
+        <p>
+            <button id="to-favs" class="add-to-favorites" style="font-size: 25px; cursor: pointer;">Dodaj do ulubionych</button>
+        </p>
+    </div>
+  </div>
+  
+
+<script>
+
+document.getElementById("to-cart").addEventListener("click", () => {
+
+    //popup
+    let popup = document.createElement("div");
+popup.style.position = "fixed";
+popup.style.top = "50%";
+popup.style.left = "50%";
+popup.style.transform = "translate(-50%, -50%)";
+popup.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+popup.style.color = "white";
+popup.style.padding = "20px";
+popup.style.borderRadius = "10px";
+popup.style.boxShadow = "0px 0px 10px black";
+popup.innerHTML = "Dodano do koszyka";
+popup.style.fontSize = "30px";
+document.body.appendChild(popup);
+
+setTimeout(function() {
+  popup.style.display = "none";
+}, 1000);
+
+//dodanie do ciasteczka
+    let currentCart;
+    if (getCookie("cart")) {
+        currentCart = JSON.parse(getCookie("cart"));
+    } else {
+        currentCart = [];
+    }
+    let isbnExists = false;
+    for (let i = 0; i < currentCart.length; i++) {
+        if (currentCart[i].isbn === isbn) {
+            currentCart[i].quantity++;
+            isbnExists = true;
+            break;
+        }   
+    }
+    if (!isbnExists) {
+        currentCart.push({isbn: isbn, quantity: 1});
+    }
+    document.cookie = "cart=" + JSON.stringify(currentCart);
+});
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+    while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+    }
+    }
+    return "";
+}
+
+document.getElementById("to-favs").addEventListener("click", () => {
+    console.log("favs");
+});
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const isbn = urlParams.get("isbn");
+
+
+
+// do generowania gwiazdek-opinii  (nie sprawdzone czy działa w każdym przypadku)
+function showStars(rate) {
+        var stars = "<div class=\"stars\">";
+        for (let i = 0; i < Math.floor(rate); i++) {
+            stars += "<i class=\"fas fa-star\"></i>";
+        }
+        if (rate > Math.floor(rate)) {
+            stars += "<i class=\"fas fa-star-half-alt\"></i>";
+        }
+        for (let i = 0; i < 5 - Math.ceil(rate); i++) {
+            stars += "<i class=\"far fa-star\"></i>";
+        }
+        stars += "</div>"
+        return stars;
+    }
+
+
+
+
+
+
+
+
+
+const fetchJSON = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  async function update(){
+    data = await fetchJSON("http://127.0.0.1:8000/ksiazka");
+    photoPath = "";
+    title = "";
+    author = "";
+    description = "";
+    price = 0;
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i];
+      if(element.ISBN == isbn){
+        photoPath = "http://127.0.0.1:8000/Images/" + element.Zdjecie;
+        title = element.TytulKs;
+        author = element.AutorKs;
+        description = element.Opis;
+        price = element.CenaKs.toFixed(2) + " zł";
+      }
+        
+      const bookTitle = document.getElementById("title");
+      const bookAuthor = document.getElementById("author");
+      const bookPrice = document.getElementById("price");
+      const bookStars = document.getElementById("stars");
+      const bookDescription = document.getElementById("description");
+      document.getElementById("image").src = photoPath;
+      const r = await fetchJSON('http://127.0.0.1:8000/recenzja');
+      var rate = 0;
+      for (let j = 0; j < r.length; j++) {
+        const eee = r[j];
+        if (eee.IdKs == data[i].ISBN) {
+            rate = eee.Ocena;
+        }
+      }
+
+
+
+
+      bookTitle.innerHTML = title;
+      bookAuthor.innerHTML = author;
+      bookDescription.innerHTML = description;
+      bookPrice.innerHTML = price;
+      bookStars.innerHTML = showStars(rate);
+    }
+  }
+  update()
+</script>
+
+<section class="footer" id="contact">
+    <div class="credit">  </div>
+    <div class="box-container">
+
+        
+        <div class="box">
+            <h3>Kontakt</h3>
+            <a > <i class="fas fa-phone"></i> 987-148-821 </a>
+            <a > <i class="fas fa-phone"></i> 213-769-112 </a>
+            <a href="mailto:iks_ksiegarnia@gmail.com"> <i class="fas fa-envelope"></i> iks_ksiegarnia@gmail.com </a>
+        </div>
+        
+    </div>
+
+</section>
+
+
+
+
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

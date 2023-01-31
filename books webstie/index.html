@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iks księgarnia internetowa</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- ikony  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <div class="header-1">
+
+        <a href="index.html" class="logo"> IKS <i class="fas fa-book"></i></a>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="wyszukaj tytuł..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search" onclick="searchValue()"></div>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="cart.html" class="fas fa-shopping-cart"></a>
+            <div id="login-btn" class="fas fa-user"> Zaloguj</div>
+            
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="catalog.html">Oferta</a>
+            <a href="#featured">Bestsellery</a>
+            <a href="#arrivals">Nowości</a>
+
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </div>
+
+</header>
+
+
+
+
+
+
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+    <a href="#home" class="fas fa-home"></a>
+    <a href="#featured" class="fas fa-list"></a>
+    <a href="#arrivals" class="fas fa-tags"></a>
+
+    <a href="#contact" class="footer"></a>
+</nav>
+
+<!-- login form  -->
+
+<div class="login-form-container">
+
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="">
+        <h3>Logowanie</h3>
+        <span>Nazwa użytkownika</span>
+        <input type="text" name="" class="box" placeholder="wprowadź login" id="login">
+        <span>Hasło</span>
+        <input type="password" name="" class="box" placeholder="wprowadź hasło" id="password">
+
+        <input type="button" value="Zaloguj się" class="btn" onclick="logClick()">
+
+        <p>Nie masz konta? <a href="#">Utwórz je tutaj</a></p>
+    </form>
+
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+
+
+
+<p id="aaa"></p>
+<script>
+
+
+    async function searchValue() {
+      var searchBox = document.getElementById("search-box").value;
+      url = `http://127.0.0.1:8000/search/${searchBox}`;
+      const r = await fetchJSON(url);
+      element.getElementById('aaa').innerHTML = r;
+    console.log(r);
+
+
+
+      // tutaj możesz dodać swój kod do wyszukiwania wartości
+    }
+</script>
+
+
+
+
+<section class="arrivals" id="arrivals">
+
+    <h1 class="heading"> <span>Nowości</span> </h1>
+
+    <div class="swiper arrivals-slider" >
+
+        <div class="swiper-wrapper">
+
+            <a id="newestBooks_book0_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-1.png" alt="">
+                </div>
+                <div class="content">
+                    <h3 id="newestBooks_book0_title">new</h3>
+                    <div class="price" id="newestBooks_book0_price">p </div>
+                    <i id="newestBooks_book0_stars"></i>
+
+                </div>
+            </a>
+
+            <a id="newestBooks_book1_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-2.png" alt="">
+                </div>
+                <div class="content">
+                    <h3 id="newestBooks_book1_title">new</h3>
+                    <div class="price" id="newestBooks_book1_price">p </div>
+                    <i id="newestBooks_book1_stars"></i>
+
+                </div>
+            </a>
+
+            <a id="newestBooks_book2_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-3.png" alt="">
+                </div>
+                <div class="content">
+                    <h3 id="newestBooks_book2_title">new</h3>
+                    <div class="price" id="newestBooks_book2_price">p </div>
+                    <i id="newestBooks_book2_stars"></i>
+
+                </div>
+            </a>
+
+
+    </div>
+
+    <div class="swiper arrivals-slider">
+
+        <div class="swiper-wrapper">
+
+            <a id="newestBooks_book3_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-6.png" alt="">
+                </div>
+                <div class="content">
+                    <h3 id="newestBooks_book3_title">new</h3>
+                    <div class="price" id="newestBooks_book3_price">p </div>
+                    <i id="newestBooks_book3_stars"></i>
+
+                </div>
+            </a>
+
+            <a id="newestBooks_book4_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-7.png" alt="">
+                </div>
+                <div class="content">
+                    <h3  id="newestBooks_book4_title">new</h3>
+                    <div class="price" id="newestBooks_book4_price">p</div>
+                    <i id="newestBooks_book4_stars"></i>
+
+                </div>
+            </a>
+
+            <a id="newestBooks_book5_url" class="swiper-slide box">
+                <div class="image">
+                    <img src="image/book-8.png" alt="">
+                </div>
+                <div class="content">
+                    <h3  id="newestBooks_book5_title">new</h3>
+                    <div class="price" id="newestBooks_book5_price">p</div>
+                    <i id="newestBooks_book5_stars"></i>
+
+                </div>
+            </a>
+
+        
+
+    </div>
+</section>
+
+
+
+
+
+
+<section class="deal">
+
+    <div class="content">
+        <h3>Dzisiaj w promocji - taniej o 50%</h3>
+      
+        <h1 id="bookPromo_title"></h1>
+        <p id="bookPromo_author"></p>
+        <div class="price" id="bookPromo_oldPrice"></div>
+        <div class="price" id="bookPromo_price"></div>
+        
+        <a href="#" class="btn">Kup teraz</a>
+    </div>
+
+    <div class="image">
+        <img id="promoBookPhoto" src="image/deal-img.jpg" alt="" style="max-width: 50%; height: auto;">
+    </div>
+
+</section>
+
+
+
+
+
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-shipping-fast"></i>
+        <div class="content">
+            <h3>Darmowa wysyłka</h3>
+            <p>Zamówień za ponad 200zł</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-lock"></i>
+        <div class="content">
+            <h3>Bezpieczna płatność</h3>
+            <p>100% bezpieczeństwa</p>
+        </div>
+    </div>
+
+
+    <div class="icons">
+        <i class="fas fa-headset"></i>
+        <div class="content">
+            <h3>Wsparcie 24/7</h3>
+            <p>Skontaktuj się z nami kiedy tylko chcesz</p>
+        </div>
+    </div>
+
+</section>
+
+<!-- icons section ends -->
+
+<!-- featured section starts  -->
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>Bestsellery</span> </h1>
+
+    <div class="swiper featured-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book0_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book0_cover" src="image/book-1.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book0_stars"></i>
+                    <h3 id="bestsellerBooks_book0_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book0_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book1_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book1_cover" src="image/book-2.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book1_stars"></i>
+                    <h3 id="bestsellerBooks_book1_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book1_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book2_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book2_cover" src="image/book-3.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book2_stars"></i>
+                    <h3 id="bestsellerBooks_book2_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book2_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book3_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book3_cover" src="image/book-4.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book3_stars"></i>
+                    <h3 id="bestsellerBooks_book3_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book3_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book4_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book4_cover" src="image/book-5.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book4_stars"></i>
+                    <h3 id="bestsellerBooks_book4_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book4_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book5_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book5_cover" src="image/book-6.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book5_stars"></i>
+                    <h3 id="bestsellerBooks_book5_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book5_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book6_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book6_cover" src="image/book-7.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book6_stars"></i>
+                    <h3 id="bestsellerBooks_book6_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book6_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book7_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book7_cover" src="image/book-8.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book7_stars"></i>
+                    <h3 id="bestsellerBooks_book7_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book7_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book8_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book8_cover" src="image/book-9.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book8_stars"></i>
+                    <h3 id="bestsellerBooks_book8_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book8_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-heart"></a>
+                    <a id="bestsellerBooks_book9_url" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img id="bestsellerBooks_book9_cover" src="image/book-10.png" alt="">
+                </div>
+                <div class="content">
+                    <i id="bestsellerBooks_book9_stars"></i>
+                    <h3 id="bestsellerBooks_book9_title">title</h3>
+                    <div class="price" id="bestsellerBooks_book9_price">p</div>
+                    <a href="#" class="btn">Kup teraz</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+    // do generowania gwiazdek-opinii  (nie sprawdzone czy działa w każdym przypadku)
+    function showStars(rate) {
+        var stars = "<div class=\"stars\">";
+        for (let i = 0; i < Math.floor(rate); i++) {
+            stars += "<i class=\"fas fa-star\"></i>";
+        }
+        if (rate > Math.floor(rate)) {
+            stars += "<i class=\"fas fa-star-half-alt\"></i>";
+        }
+        for (let i = 0; i < 5 - Math.ceil(rate); i++) {
+            stars += "<i class=\"far fa-star\"></i>";
+        }
+        stars += "</div>"
+        return stars;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    const fetchJSON = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  const url = 'http://127.0.0.1:8000/newest';
+  const promoBookUrl = 'http://127.0.0.1:8000/promoBook';
+  const bestsellersUrl = 'http://127.0.0.1:8000/bestsellers';
+
+  
+  async function updateUI() {
+    const data = await fetchJSON(url);
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i];
+      const title = element.TytulKs;
+      const price = element.CenaKs.toFixed(2) + " zł";
+      const isbn = element.ISBN;
+      const photoPath = "http://127.0.0.1:8000/Images/" + element.Zdjecie;
+      const r = await fetchJSON('http://127.0.0.1:8000/recenzja');
+      var rate = 0;
+      for (let j = 0; j < r.length; j++) {
+        const eee = r[j];
+        if (eee.IdKs == data[i].ISBN) {
+            rate = eee.Ocena;
+        }
+      }
+
+        
+      const bookTitle = document.getElementById(`newestBooks_book${i}_title`);
+      const bookPrice = document.getElementById(`newestBooks_book${i}_price`);
+      const bookStars = document.getElementById(`newestBooks_book${i}_stars`);
+      const bookUrl = document.getElementById(`newestBooks_book${i}_url`);
+      document.querySelectorAll(`.swiper-slide .image img`)[i].src = photoPath;
+      
+      if(bookTitle){
+      bookTitle.innerHTML = title;
+      bookPrice.innerHTML = price;
+      bookStars.innerHTML = showStars(rate);
+      bookUrl.href = `book_details.html?isbn=${isbn}`;
+      }
+    }
+
+
+
+    const dataBestsellers = await fetchJSON(bestsellersUrl);
+    for (let i = 0; i < dataBestsellers.length; i++) {
+      const element = dataBestsellers[i];
+      const title = element.TytulKs;
+      const price = element.CenaKs.toFixed(2) + " zł";
+      const isbn = element.ISBN;
+      const photoPath = "http://127.0.0.1:8000/Images/" + element.Zdjecie;
+      const r = await fetchJSON('http://127.0.0.1:8000/recenzja');
+      var rate = 0;
+      for (let j = 0; j < r.length; j++) {
+        const eee = r[j];
+        if (eee.IdKs == dataBestsellers[i].ISBN) {
+            rate = eee.Ocena;
+        }
+      }
+
+        
+      const bookTitle = document.getElementById(`bestsellerBooks_book${i}_title`);
+      const bookPrice = document.getElementById(`bestsellerBooks_book${i}_price`);
+      const bookStars = document.getElementById(`bestsellerBooks_book${i}_stars`);
+      const bookUrl = document.getElementById(`bestsellerBooks_book${i}_url`);
+      const bookCover = document.getElementById(`bestsellerBooks_book${i}_cover`);
+      if(bookTitle){
+      bookTitle.innerHTML = title;
+      bookPrice.innerHTML = price;
+      bookStars.innerHTML = showStars(rate);
+      bookUrl.href = `book_details.html?isbn=${isbn}`;
+      }
+      if(bookCover) {
+      bookCover.src = photoPath;
+      }
+    }
+
+
+
+
+
+
+    const promoBook = await fetchJSON(promoBookUrl);
+    const promoBookTitle = document.getElementById("bookPromo_title");
+    promoBookTitle.innerHTML = '"' + promoBook.TytulKs + '"';
+    const promoBookAuthor = document.getElementById("bookPromo_author");
+    promoBookAuthor.innerHTML = "Autor: " + promoBook.AutorKs;
+    const promoBookPhoto = document.getElementById("promoBookPhoto");
+    promoBookPhoto.src = "http://127.0.0.1:8000/Images/" + promoBook.Zdjecie;
+
+    const promoBookPrice = document.getElementById("bookPromo_price");
+    promoBookPrice.innerHTML = (promoBook.CenaKs * 0.5).toFixed(2) + " zł";
+    const promoBookOldPrice = document.getElementById("bookPromo_oldPrice");
+    promoBookOldPrice.innerHTML = `<span>${promoBook.CenaKs + " zł"}</span>`;
+    
+  }
+  updateUI();
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+<section class="catalog" id="catalog" style="text-align: center;">
+
+    <h1 class="heading"> <span>Katalog</span> </h1>
+    <h1 style="font-size: xx-large; color: #444;">Przejdź do katalogu, aby zobaczyć wszystkie książki z naszej oferty.</h1>
+    <br>
+    <a href="catalog.html" class="btn" style="font-size: xx-large;">Przejdź do katalogu</a>
+</section>
+
+
+
+
+
+
+<section class="footer" id="contact">
+    <div class="credit">  </div>
+    <div class="box-container">
+
+        
+        <div class="box">
+            <h3>Kontakt</h3>
+            <a > <i class="fas fa-phone"></i> 987-148-821 </a>
+            <a > <i class="fas fa-phone"></i> 213-769-112 </a>
+            <a href="mailto:iks_ksiegarnia@gmail.com"> <i class="fas fa-envelope"></i> iks_ksiegarnia@gmail.com </a>
+        </div>
+        
+    </div>
+
+</section>
+
+
+
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

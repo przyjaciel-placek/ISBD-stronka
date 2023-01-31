@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- ikony  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <div class="header-1">
+
+        <a href="index.html" class="logo"> IKS <i class="fas fa-book"></i></a>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="wyszukaj tytuł..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="cart.html" class="fas fa-shopping-cart"></a>
+            <div id="login-btn" class="fas fa-user"> Zaloguj</div>
+            
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="index.html">Strona główna</a>
+            <a href="#catalog">Oferta</a>
+
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+    <a href="#home" class="fas fa-home"></a>
+
+    <a href="#contact" class="footer"></a>
+</nav>
+
+<!-- login form  -->
+
+<div class="login-form-container">
+
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="">
+        <h3>Logowanie</h3>
+        <span>Nazwa użytkownika</span>
+        <input type="text" name="" class="box" placeholder="wprowadź login" id="login">
+        <span>Hasło</span>
+        <input type="password" name="" class="box" placeholder="wprowadź hasło" id="password">
+
+        <input type="button" value="Zaloguj się" class="btn" onclick="logClick()">
+
+        <p>Nie masz konta? <a href="#">Utwórz je tutaj</a></p>
+    </form>
+
+</div>
+
+<h1 class="heading"> <span>Oferta</span> </h1>
+
+
+
+<script>
+    
+
+
+const fetchJSON = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+async function getBooks() {
+  const data = await fetchJSON("http://127.0.0.1:8000/ksiazka");
+  const bookList = document.getElementById("bookList");
+
+  const table = document.createElement("table");
+
+for (let i = 0; i < data.length; i++) {
+  const book = data[i];
+
+  const row = document.createElement("tr");
+
+  const imageCell = document.createElement("td");
+  const img = document.createElement("img");
+  img.src = `http://127.0.0.1:8000/Images/${book.Zdjecie}`;
+  img.style.height = "297px";
+  img.style.width = "210px";
+  imageCell.appendChild(img);
+  row.appendChild(imageCell);
+
+  const titleCell = document.createElement("td");
+  titleCell.innerText = book.TytulKs;
+  titleCell.style.marginRight = "20px";
+  titleCell.style.fontSize = "40px";
+  row.appendChild(titleCell);
+
+  const authorCell = document.createElement("td");
+  authorCell.innerText = book.AutorKs;
+  authorCell.style.marginRight = "20px";
+  authorCell.style.fontSize = "20px";
+  row.appendChild(authorCell);
+
+  const priceCell = document.createElement("td");
+  priceCell.innerText = `${book.CenaKs.toFixed(2)} zł`;
+  priceCell.style.fontSize = "30px";
+  priceCell.style.marginRight = "100px";
+  row.appendChild(priceCell);
+
+  const linkCell = document.createElement("td");
+const link = document.createElement("a");
+link.innerText = "Wybierz";
+link.href = `book_details.html?isbn=${book.ISBN}`;
+link.style.fontSize = "30px";
+link.style.marginRight = "100px";
+link.style.textDecoration = "none";
+linkCell.appendChild(link);
+row.appendChild(linkCell);
+
+  table.appendChild(row);
+}
+
+bookList.appendChild(table);
+}
+
+getBooks()
+</script>
+
+
+
+
+
+<section id="catalog">
+    <div id="bookList">
+    </div>
+  </section>
+  
+
+
+
+<section class="footer" id="contact">
+    <div class="credit">  </div>
+    <div class="box-container">
+
+        
+        <div class="box">
+            <h3>Kontakt</h3>
+            <a > <i class="fas fa-phone"></i> 987-148-821 </a>
+            <a > <i class="fas fa-phone"></i> 213-769-112 </a>
+            <a href="mailto:iks_ksiegarnia@gmail.com"> <i class="fas fa-envelope"></i> iks_ksiegarnia@gmail.com </a>
+        </div>
+        
+    </div>
+
+</section>
+
+
+
+
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

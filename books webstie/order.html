@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dane adresowe</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- ikony  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    
+<!-- header section starts  -->
+
+<header class="header">
+
+    <div class="header-1">
+
+        <a href="index.html" class="logo"> IKS <i class="fas fa-book"></i></a>
+
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="wyszukaj tytuł..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" class="fas fa-heart"></a>
+            <a href="cart.html" class="fas fa-shopping-cart"></a>
+            <div id="login-btn" class="fas fa-user"> Zaloguj</div>
+            
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="index.html">Strona główna</a>
+            <a href="catalog.html">Oferta</a>
+
+            <a href="#contact">Kontakt</a>
+        </nav>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+    <a href="#home" class="fas fa-home"></a>
+
+    <a href="#contact" class="footer"></a>
+</nav>
+
+<!-- login form  -->
+
+<div class="login-form-container">
+
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+    <form action="">
+        <h3>Logowanie</h3>
+        <span>Nazwa użytkownika</span>
+        <input type="text" name="" class="box" placeholder="wprowadź login" id="login">
+        <span>Hasło</span>
+        <input type="password" name="" class="box" placeholder="wprowadź hasło" id="password">
+
+        <input type="button" value="Zaloguj się" class="btn" onclick="logClick()">
+
+        <p>Nie masz konta? <a href="#">Utwórz je tutaj</a></p>
+    </form>
+
+</div>
+
+<h1 class="heading"> <span>Dane adresowe</span> </h1>
+
+<form>
+    <label for="name">Imię:</label>
+    <input style="background-color: lightblue;" type="text" id="name" name="name">
+    <label for="surname">Nazwisko:</label>
+    <input style="background-color: lightblue;" type="text" id="surname" name="surname"><br><br>
+    <label for="street">Ulica:</label>
+    <input style="background-color: lightblue;" type="text" id="street" name="street">
+    <label for="house-number">Nr domu:</label>
+    <input style="background-color: lightblue;" type="text" id="house-number" name="house-number">
+    <label for="apartment-number">Nr mieszkania:</label>
+    <input style="background-color: lightblue;" type="text" id="apartment-number" name="apartment-number"><br><br>
+    <label for="postal-code">Kod pocztowy:</label>
+    <input style="background-color: lightblue;" type="text" id="postal-code" name="postal-code">
+    <label for="city">Miasto:</label>
+    <input style="background-color: lightblue;" type="text" id="city" name="city"><br><br>
+    <p>Wybierz opcję płatności:</p>
+    <input type="radio" id="blik" name="payment-option" value="blik">
+    <label for="blik">Blik</label><br>
+    <input type="radio" id="transfer" name="payment-option" value="transfer">
+    <label for="transfer">Przelew</label><br><br>
+    <p>Wybierz opcję dostawy:</p>
+    <input type="radio" id="paczkomat" name="delivery-option" value="paczkomat">
+    <label for="paczkomat">Paczkomat</label><br>
+    <input type="radio" id="courier" name="delivery-option" value="courier">
+    <label for="courier">Kurier</label><br><br>
+  </form>
+  <button style="font-size: 30px; margin-left: 550px; cursor: pointer;" id="confirm-order" >Opłać zamówienie</button>
+
+
+<script>
+
+    document.getElementById("confirm-order").addEventListener("click", () => {
+        addOrderToDatabase();
+    });
+
+    function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+    while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+    }
+    }
+    return "";
+}
+
+const fetchJSON = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  function test() {
+    d = new Date();
+    var dateString = d.toISOString().substring(0, 10);
+    axios.post("http://127.0.0.1:8000/zamowienie",{
+    DataZ:dateString,
+    Status:"Opłacone",
+    Adres:"adres",
+    LoginK:1, 
+    IdKs:"9788381255844",
+  }).then((response)=>{
+            alert(response.data);
+        });
+  }
+
+  async function addOrderToDatabase() {
+                              
+    const name = document.getElementById("name").value;
+    const surname = document.getElementById("surname").value;
+    const street = document.getElementById("street").value;
+    const houseNumber = document.getElementById("house-number").value;
+    const apartmentNumber = document.getElementById("apartment-number").value;
+    const postalCode = document.getElementById("postal-code").value;
+    const city = document.getElementById("city").value;
+    const address = name + "; " + surname + "; " + street + "; " + houseNumber + "; " + apartmentNumber + "; " + postalCode + "; " + city;
+
+    let currentLogin = getCookie("login");
+    let currentCart = JSON.parse(getCookie("cart")) || [];
+    const data = await fetchJSON("http://127.0.0.1:8000/ksiazka");
+    const dataClient = await fetchJSON("http://127.0.0.1:8000/klient");
+    clientId = 0;
+    date = new Date();
+    var dateString = date.toISOString().substring(0, 10);
+    for(let i = 0; i < dataClient.length; i++) {
+        if (currentLogin == dataClient[i].LoginK) {
+            clientId = dataClient[i].IdK;
+        }
+    }
+
+    for (let i = 0; i < currentCart.length; i++) {
+    const {isbn, quantity} = currentCart[i];
+
+        axios.post("http://127.0.0.1:8000/zamowienie",{
+        DataZ:dateString,
+        Status:"Opłacone",
+        Adres:address,
+        LiczbaKs:quantity,
+        LoginK:clientId, 
+        IdKs:isbn,
+    })
+    }
+    alert("Przekierowanie do strony płatności");
+    document.cookie = "cart=";
+    window.location.href = "summary.html";
+}
+
+</script>  
+
+<section class="footer" id="contact">
+    <div class="credit">  </div>
+    <div class="box-container">
+
+        
+        <div class="box">
+            <h3>Kontakt</h3>
+            <a > <i class="fas fa-phone"></i> 987-148-821 </a>
+            <a > <i class="fas fa-phone"></i> 213-769-112 </a>
+            <a href="mailto:iks_ksiegarnia@gmail.com"> <i class="fas fa-envelope"></i> iks_ksiegarnia@gmail.com </a>
+        </div>
+        
+    </div>
+
+</section>
+
+
+
+
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
